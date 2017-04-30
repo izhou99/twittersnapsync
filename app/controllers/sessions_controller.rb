@@ -1,7 +1,5 @@
-require 'pp'
 class SessionsController < ApplicationController
   def create
-    pp request.env['omniauth.auth'] 
     credentials = request.env['omniauth.auth']['credentials']
     session[:access_token] = credentials['token']
     session[:access_token_secret] = credentials['secret']
