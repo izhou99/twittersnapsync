@@ -3,6 +3,8 @@ ruby '2.3.1'
 
 gem 'rails', '~> 4.2.7'
 
+gem 'sqlite3'
+gem 'sequel-rails'
 gem 'haml'
 gem 'omniauth'
 gem 'omniauth-twitter'

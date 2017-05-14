@@ -10,6 +10,19 @@ class SessionsController < ApplicationController
   end
 
   def show
+    # if cookies.has_key?(:unique_hit_key)
+       hit = Hit.find("1")
+       hit.hits = hit.hits.to_i+1
+       hit.save
+       @hits = hit.hits
+    # else
+    #  cookies[:unique_hit_key] = {
+    #    :value => Hit.create(hits: 1).id,
+    #    :expires => 1.year.from_now,
+    #    :domain => 'domain.com'
+    #  }
+    #  @hits = Hit.find(1).hits
+   # end
     if session['access_token'] && session['access_token_secret']
       @user = client.user(include_entities: true)
       friends = get_friends
@@ -25,7 +38,7 @@ class SessionsController < ApplicationController
         found = false
         snapchat = ""
         while i < pieces.length
-          if pieces[i].downcase.include?("snap")
+          if !found && pieces[i].downcase.include?("snap") 
             found = true
             i += 1
             next
@@ -36,7 +49,7 @@ class SessionsController < ApplicationController
               pieces[i].downcase == "chat" ||
               pieces[i].length < 5
               i += 1
-              next 
+              next
             end
             snapchat = pieces[i]
             break

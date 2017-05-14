@@ -1,0 +1,3 @@
+development:
+  adapter: sqlite # Also accept sqlite3
+  database: db/mydatabase.sqlite # Path to db relative to Rails root
